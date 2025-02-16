@@ -32,7 +32,7 @@ SHEET_ID = "185XRA23EbkqWg2E_QBXFwzFjsnsS6Rh9ksiFlU8LCdo"  # Replace with your G
 SHEET_NAME = "SVS_Foods"  # Sheet Name
 
 # Authenticate Google Sheets API
-creds = Credentials.from_service_account_file(service_account_info, scopes=["https://www.googleapis.com/auth/spreadsheets.readonly"])
+creds = Credentials.from_service_account_info(service_account_info, scopes=["https://www.googleapis.com/auth/spreadsheets.readonly"])
 client = gspread.authorize(creds)
 
 def fetch_product_data():
