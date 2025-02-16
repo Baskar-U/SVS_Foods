@@ -40,7 +40,7 @@ def fetch_product_data():
     
     return product_dict
 
-@app.route("/", methods=["GET"])
+@app.route("/webhook", methods=["GET"])
 def verify():
     """Verify Webhook"""
     if request.args.get("hub.verify_token") == VERIFY_TOKEN:
