@@ -186,18 +186,14 @@ def confirm_order(sender_id):
     send_message(sender_id, order_summary)
 
 
+import logging
+
+logging.basicConfig(level=logging.INFO)
+
 def send_message(recipient_id, message, buttons=None):
-    """Send WhatsApp Message via API"""
     url = f"https://graph.facebook.com/v13.0/{PHONE_NUMBER_ID}/messages"
     headers = {"Authorization": f"Bearer {ACCESS_TOKEN}", "Content-Type": "application/json"}
     
-    payload = {
-        "messaging_product": "whatsapp",
-        "to": recipient_id,
-        "type": "text",
-        "text": {"body": message}
-    }
-
     if buttons:
         payload = {
             "messaging_product": "whatsapp",
@@ -209,12 +205,16 @@ def send_message(recipient_id, message, buttons=None):
                 "action": {"buttons": buttons}
             }
         }
-    
-    response = requests.post(url, headers=headers, json=payload)
-    if response.status_code == 200:
-        print("Message sent successfully!")
     else:
-        print("Error sending message:", response.text)
+        payload = {
+            "messaging_product": "whatsapp",
+            "to": recipient_id,
+            "type": "text",
+            "text": {"body": message}
+        }
+
+    response = requests.post(url, json=payload, headers=headers)
+    logging.info(f"WhatsApp API Response: {response.status_code} - {response.text}")
 
 def send_product_buttons(sender_id, product_data):
     """Send Product List from Google Sheet"""
