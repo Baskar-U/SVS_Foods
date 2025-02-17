@@ -7,23 +7,8 @@ app = Flask(__name__)
 
 # Temporary user session storage
 user_data = {}
-service_account_info = {
-  "type": "service_account",
-  "project_id": "strong-skyline-451207-f6",
-  "private_key_id": "27100c085c1b563857ce7b1441ccb13bbba74494",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDOI6U2qCwY+jTZ\nVL4guTqOfWDZ1f1LDYjAJydBvmuThRgLWYL5HpnTL8DQZsrYBH8BpSgcRJC8dYNd\noIGrBOjCl3Xf2SLBJypNuLp/xCNRrDZ4FWSCgGznQ8ZYaayLQH/kmFrD+uArGfid\nFtDrxht2rxrm7qcO3mGbdDyQe+tSaH//3JJ65bvqyOKvS6XLcN7IRufgpxgma+l7\nfru9j9KNotu5Ci9AZXwBZY8nD5SGvKgV3RzCqjwocM/keD6gFwZB5AS8yzXbpefZ\nSniq4Dd/zlDevUEBtCJVD5tcryZEQCSjKMtqurL3P6wBxOTC06wP5Nax5QQ5hRgS\ns2pqAz61AgMBAAECggEAFQYVp4lnVfTOxwuZiITbsAShiBYHC0yKEe7sVgwxtI3y\ncdXjQb0ZOyy3oYmaToXG3kgV2ywzBsWFbFseXm7VvmLsJrRikwiHi/23J6i9YWsK\n8xxbb+PhN4T2CbZdXqZpZMsVFr/TdRHlBUB6dlFyI5ygRcU5TI7prY0hUCsTSQgo\niYvVFjUsTGY0hAibY+3qLTDP6Jm7AStjlJVaHO/UnPByX46wp5rYSvXMlIm1lTIc\nbMpwpLovN1drq0w3y73v6EG2jwEsaafcjZ6Ng6bB96VxkNN1sUQhx0VD5fA7AGBd\nppVzE3GnQVT1FUMDlO6H2me1AXPVwJdBhIopYn+JgQKBgQDn7Ybs1qKZtb3xQJVQ\n929JzjKdBX/6LSsqr6Ml3XvvKq87dH77KdnLwChj55G4kirQZPC/ZMwfjWGCdQsE\n18UPKi2musqpu2egfp1XUzHCqe4QpTSAi7A77+iYpnZan7NyFuGlkj1j2NpAVqY7\naz9RtLiywQkyImCn0pddbbgS2QKBgQDjiOYD740ItysUlUarXdZznPisi2zWxuk9\nCRpLfB2iPw/Xa5HIc91ZUgLRE29ghEjbQb4K+d8vso1Fq8rd3O+fh8s/fkJLD2Fu\nNfEvWkaGDh+hRIaCsWM6X14KtXNvi5oZ/9OR+MmAB2hkYgnya9/Z7/K2W3Rwo0iD\naJEtIfIpPQKBgDn7J8AN6JiE1vd5LdsQAMJyyjR3K4dfw2rofeD5fgJMqYIznYss\n60YExBQ10DhUUl/G3Gj8ygsZTUdP+3E6gAlKgh8sk33bXAzDmpI6OjZwRRPkOTvp\nsCVL1NpUw0HkqvfawI6kALT1gZqUDvrL1QiYJZSKrcHa1k8eVrkEtQABAoGAXNLM\ng26GqreO66a6Xc66Xg/7ouh+TmB3Zl8ASysnK7luTQOlRZF/C6FZZNH47fcJgekg\nDnpBgsPkvjeHW1t2pi5PzGdFxDlSFhQLgLXjb2zzmmbKOScExBuD0fqUTT02cMTd\nGv/TtFdRTyJvzGYVvGMXMS2+IvV576IJF9BxakECgYEAnfVJ4SEDjPBWsgG8A0D0\nmkv8Gd/OkOS+4DovTn2dXxey/TZhedulLiid/KajrTiyM+wjJa3+xeFzAeS2mPv0\ns4D/I9d6TpOcfsMYMTVCSEyaxYbczaNTPFm6My+TZXlMBqQahB6rbr7Tic/vqYnp\nZeOeS5NJ2R+ZiltxPEZQhj4=\n-----END PRIVATE KEY-----\n",
-  "client_email": "svs-foods@strong-skyline-451207-f6.iam.gserviceaccount.com",
-  "client_id": "110193641244795495254",
-  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-  "token_uri": "https://oauth2.googleapis.com/token",
-  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/svs-foods%40strong-skyline-451207-f6.iam.gserviceaccount.com",
-  "universe_domain": "googleapis.com"
-}
-
-
-
-
+with open("/etc/secrets/svsf.json") as f:
+    service_account_info = json.load(f)
 
 
 # WhatsApp API Credentials
