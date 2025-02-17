@@ -23,6 +23,7 @@ service_account_info = {
 
 
 
+
 # WhatsApp API Credentials
 ACCESS_TOKEN = "EAAOAi7h03l8BOwAmh1ZAH2II3n20TqiAENZAXZBfhxTZCarO7xiVrVHvKCdcdhZCfUyu3zgkGZBaC99jZBah1FFisTgSCXCpxpE0iBhZBgGsk4XPGsITuoxPZAykClSwNPt1VIcxMStJqpBY5bbEaiySukoaFv9efIC4GhQTdDhIrxbevGsE1sdjCZB3rJ4SrlyXjnplU8WRhpqVdy5KI9ZBllFovZBTjpAZD"
 PHONE_NUMBER_ID = "550908254774273"
