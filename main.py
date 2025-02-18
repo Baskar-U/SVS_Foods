@@ -148,8 +148,7 @@ def handle_button_reply(sender_id, button_reply):
             send_message(sender_id, "Great! Let's proceed with your order. Please enter your *Name*:")            
             user_data[sender_id]["step"] = "get_name"
         else:
-            send_message(sender_id, "Would you like to explore our menu or need assistance with something else?")  
-            send_message(sender_id, ["View Menu", "Ask a Question", "Exit"])
+            send_message(sender_id,"Would you like to explore our menu or need assistance with something else?", ["View Menu", "Ask a Question", "Exit"])
             user_data[sender_id]["step"] = "after_no_options"
 
 
