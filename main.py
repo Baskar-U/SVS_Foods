@@ -148,17 +148,14 @@ def handle_button_reply(sender_id, button_reply):
             send_message(sender_id, "Great! Let's proceed with your order. Please enter your *Name*:")            
             user_data[sender_id]["step"] = "get_name"
         else:
-            user_data[sender_id]["step"] = "after_no_response"  # Set a new step
+            send_message(sender_id, "Would you like to explore our menu or need assistance with something else?")  
+            send_quick_reply(sender_id, ["View Menu", "Ask a Question", "Exit"])
+            user_data[sender_id]["step"] = "after_no_options"
 
 
     elif step == "get_payment_method":  # 🚀 Fix: Handle Payment Selection Here
         user_data[sender_id]["payment_method"] = reply_title.capitalize()
         confirm_order(sender_id)  # Send order summary
-        
-    elif step == "after_no_response":
-        send_message(sender_id, "Would you like to explore our menu or need assistance with something else?")  
-        send_quick_reply(sender_id, ["View Menu", "Ask a Question", "Exit"])
-        user_data[sender_id]["step"] = "after_no_options"
         
     elif step == "after_no_options":
         if reply_id == "1":  # User chooses 'View Menu'
