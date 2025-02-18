@@ -201,7 +201,7 @@ def send_quick_reply(sender_id, options):
         }
     }
     
-    send_message(,sender_id,message_data)  # Modify this function to send via WhatsApp API
+    send_message(sender_id,message_data)  # Modify this function to send via WhatsApp API
 
 def process_user_input(sender_id, user_input):
     """Handle text input based on the current step."""
