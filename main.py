@@ -148,7 +148,6 @@ def handle_button_reply(sender_id, button_reply):
             send_message(sender_id, "Great! Let's proceed with your order. Please enter your *Name*:")            
             user_data[sender_id]["step"] = "get_name"
         else:
-            send_message(sender_id, "No problem! Let me know if you need anything else.")
             user_data[sender_id]["step"] = "after_no_response"  # Set a new step
 
 
@@ -165,7 +164,7 @@ def handle_button_reply(sender_id, button_reply):
         if reply_id == "1":  # User chooses 'View Menu'
             send_message(sender_id, "Here's our menu:")
         # Add menu details here
-            user_data[sender_id]["step"] = "menu_selection"
+            user_data[sender_id]["step"] = "product_selection"
     
         elif reply_id == "2":  # User chooses 'Ask a Question'
             send_message(sender_id, "Sure! What would you like to ask?")
@@ -202,7 +201,7 @@ def send_quick_reply(sender_id, options):
         }
     }
     
-    send_message(message_data)  # Modify this function to send via WhatsApp API
+    send_message(,sender_id,message_data)  # Modify this function to send via WhatsApp API
 
 def process_user_input(sender_id, user_input):
     """Handle text input based on the current step."""
