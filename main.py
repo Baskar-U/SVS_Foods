@@ -138,8 +138,10 @@ def handle_button_reply(sender_id, button_reply):
         if reply_id == "1":
             send_recipe(sender_id, user_data[sender_id]["selected_product"], product_data)
             user_data[sender_id]["step"] = "order_prompt"
+            send_order_buttons(sender_id)  # Send order buttons after showing recipe
         else:
-            send_message(sender_id, "Alright! Let me know if you need anything else.")
+            send_order_buttons(sender_id)  # Send order buttons even if they select "No"
+            user_data[sender_id]["step"] = "order_prompt"
 
     elif step == "order_prompt":
         if reply_id == "1":
@@ -147,10 +149,60 @@ def handle_button_reply(sender_id, button_reply):
             user_data[sender_id]["step"] = "get_name"
         else:
             send_message(sender_id, "No problem! Let me know if you need anything else.")
+            user_data[sender_id]["step"] = "after_no_response"  # Set a new step
+
 
     elif step == "get_payment_method":  # 🚀 Fix: Handle Payment Selection Here
         user_data[sender_id]["payment_method"] = reply_title.capitalize()
         confirm_order(sender_id)  # Send order summary
+        
+    elif step == "after_no_response":
+        send_message(sender_id, "Would you like to explore our menu or need assistance with something else?")  
+        send_quick_reply(sender_id, ["View Menu", "Ask a Question", "Exit"])
+        user_data[sender_id]["step"] = "after_no_options"
+        
+    elif step == "after_no_options":
+        if reply_id == "1":  # User chooses 'View Menu'
+            send_message(sender_id, "Here's our menu:")
+        # Add menu details here
+            user_data[sender_id]["step"] = "menu_selection"
+    
+        elif reply_id == "2":  # User chooses 'Ask a Question'
+            send_message(sender_id, "Sure! What would you like to ask?")
+            user_data[sender_id]["step"] = "awaiting_question"
+    
+        else:  # User chooses 'Exit'
+            send_message(sender_id, "Alright! Have a great day. Let me know if you need anything in the future.")
+            del user_data[sender_id]  # Reset user data if needed
+def send_quick_reply(sender_id, options):
+    buttons = [
+        {
+            "type": "reply",
+            "reply": {
+                "id": f"option_{i+1}",
+                "title": option
+            }
+        }
+        for i, option in enumerate(options)
+    ]
+    
+    message_data = {
+        "messaging_product": "whatsapp",
+        "recipient_type": "individual",
+        "to": sender_id,
+        "type": "interactive",
+        "interactive": {
+            "type": "button",
+            "body": {
+                "text": "What would you like to do next?"
+            },
+            "action": {
+                "buttons": buttons
+            }
+        }
+    }
+    
+    send_message(message_data)  # Modify this function to send via WhatsApp API
 
 def process_user_input(sender_id, user_input):
     """Handle text input based on the current step."""
@@ -175,7 +227,13 @@ def process_user_input(sender_id, user_input):
         user_data[sender_id]["payment_method"] = user_input
         confirm_order(sender_id)
 
-
+def send_order_buttons(sender_id):
+    """Send Order Confirmation Buttons"""
+    buttons = [
+        {"type": "reply", "reply": {"id": "1", "title": "Yes"}},
+        {"type": "reply", "reply": {"id": "2", "title": "No"}}
+    ]
+    send_message(sender_id, "Would you like to order?", buttons)
 def confirm_order(sender_id):
     """Confirm Order and Send Summary"""
     order_summary = (
