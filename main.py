@@ -149,7 +149,7 @@ def handle_button_reply(sender_id, button_reply):
             user_data[sender_id]["step"] = "get_name"
         else:
             send_message(sender_id, "Would you like to explore our menu or need assistance with something else?")  
-            send_quick_reply(sender_id, ["View Menu", "Ask a Question", "Exit"])
+            send_message(sender_id, ["View Menu", "Ask a Question", "Exit"])
             user_data[sender_id]["step"] = "after_no_options"
 
 
@@ -170,35 +170,7 @@ def handle_button_reply(sender_id, button_reply):
         else:  # User chooses 'Exit'
             send_message(sender_id, "Alright! Have a great day. Let me know if you need anything in the future.")
             del user_data[sender_id]  # Reset user data if needed
-def send_quick_reply(sender_id, options):
-    buttons = [
-        {
-            "type": "reply",
-            "reply": {
-                "id": f"option_{i+1}",
-                "title": option
-            }
-        }
-        for i, option in enumerate(options)
-    ]
-    
-    message_data = {
-        "messaging_product": "whatsapp",
-        "recipient_type": "individual",
-        "to": sender_id,
-        "type": "interactive",
-        "interactive": {
-            "type": "button",
-            "body": {
-                "text": "What would you like to do next?"
-            },
-            "action": {
-                "buttons": buttons
-            }
-        }
-    }
-    
-    send_message(sender_id,message_data)  # Modify this function to send via WhatsApp API
+
 
 def process_user_input(sender_id, user_input):
     """Handle text input based on the current step."""
