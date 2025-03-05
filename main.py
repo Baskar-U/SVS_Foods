@@ -137,11 +137,10 @@ def handle_button_reply(sender_id, button_reply):
     elif step == "recipe_prompt":
         if reply_id == "1":
             send_recipe(sender_id, user_data[sender_id]["selected_product"], product_data)
-            user_data[sender_id]["step"] = "order_prompt"
-            send_order_buttons(sender_id)  # Send order buttons after showing recipe
-        else:
-            send_order_buttons(sender_id)  # Send order buttons even if they select "No"
-            user_data[sender_id]["step"] = "order_prompt"
+    
+    # Move to order prompt after showing recipe or skipping it
+        user_data[sender_id]["step"] = "order_prompt"
+
 
     elif step == "order_prompt":
         if reply_id == "1":
